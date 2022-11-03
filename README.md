@@ -1,2 +1,2 @@
 # go-album
-Impement scraper &amp; log in feature by using go language
+Implement scraper &amp; log in feature by using go language
