@@ -6,11 +6,6 @@ import (
 	"github.com/gocolly/colly"
 )
 
-type IndexData struct {
-	Title   string
-	Content string
-}
-
 func main() {
 	// func main
 	url := "https://zh.pngtree.com/free-animal-vectors"
@@ -50,9 +45,11 @@ func main() {
 	// 抓img Class
 	c.OnHTML("img[src]", func(e *colly.HTMLElement) {
 		fmt.Println(e.Attr("src"))
+		err := GetImg(e.Attr("src"))
+		fmt.Println(err)
 	})
 
 	c.Visit(url) // Visit 要放最後
 
-	ginWeb()
+	ginInit()
 }
