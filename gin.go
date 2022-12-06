@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"io/ioutil"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -14,8 +15,19 @@ type IndexData struct {
 }
 
 func MainPage(c *gin.Context) {
-	data := IndexData{"GOAblum", "圖片庫", ""}
-	c.HTML(http.StatusOK, "index.html", data)
+	// data := IndexData{"GOAblum", "圖片庫", ""}
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"Title":     "Sign in-GOAblum",
+		"Content":   "登入",
+		"ShowImage": "Show",
+	})
+}
+
+func GetStaticImg(c *gin.Context) {
+	// imageName 從本地讀取 img 圖庫的圖
+	imageName := "./img/295773d05fa20a3.jpg"
+	file, _ := ioutil.ReadFile(imageName)
+	c.Writer.WriteString(string(file)) // 發送圖給前端
 }
 
 func LoginPage(c *gin.Context) {
@@ -79,6 +91,7 @@ func ginInit() {
 	server.StaticFile("/custom", "./template/custom.css")
 
 	server.GET("/", MainPage)
+	server.GET("/img", GetStaticImg)
 	server.GET("/login", LoginPage)
 	server.POST("/login", LoginAuth)
 	server.Run(":8888")

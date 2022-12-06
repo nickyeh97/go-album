@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head><title>{{.Title}}</title></head>
-<body><h1>{{.Title}}</h1><p>{{.Content}}</p></body>
+<body>
+    <h1>{{.Title}}</h1>
+    <p>{{.Content}}</p>
+
+    {{if .ShowImage}}
+    <img src="//images.ctfassets.net/hrltx12pl8hq/2xohyNLiI6spSrkz8aE0cw/32f749d43a092915110caa2b0605b80f/music.jpg?fit=fill&amp;w=480&amp;h=270" alt="music - flex" class="" loading="lazy">
+    {{end}}
+</body>
+
 </html>
